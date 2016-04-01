@@ -18,6 +18,8 @@
 # limitations under the License.
 #
 
+use_inline_resources
+
 def whyrun_supported?
   true
 end
@@ -29,7 +31,7 @@ def install_fpm_package
   return if node['php']['install_method'] == 'source'
 
   if node['php']['fpm_package'].nil?
-    fail 'PHP-FPM package not found (you probably have an unsupported distro)'
+    raise 'PHP-FPM package not found (you probably have an unsupported distro)'
   else
     file node['php']['fpm_default_conf'] do
       action :nothing
